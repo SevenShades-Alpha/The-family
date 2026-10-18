@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/splash/index",
+    "pages/login/index",
+    "pages/timeline/index",
+    "pages/publish/index",
+    "pages/detail/index",
+    "pages/map/index",
+    "pages/city/index",
+    "pages/mine/index",
+    "pages/profile/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "家庭旅行日记",
+    "navigationBarBackgroundColor": "#FFF9F0",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF9F0",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#9C8C7B",
+    "selectedColor": "#B96535",
+    "backgroundColor": "#FFFCF7",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/timeline/index",
+        "text": "旅行日记"
+      },
+      {
+        "pagePath": "pages/map/index",
+        "text": "足迹地图"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的家庭"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于在旅行日记中记录您选择的旅行地点"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

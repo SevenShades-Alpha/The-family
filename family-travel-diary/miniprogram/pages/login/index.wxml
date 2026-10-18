@@ -1,0 +1,29 @@
+<view class="page login-page">
+  <view class="hero card">
+    <view class="hero-mark">✈</view>
+    <view class="title">把一家人的旅行，慢慢收藏起来</view>
+    <view class="subtitle">照片、故事和去过的地方，都是以后想起时的宝藏。</view>
+  </view>
+
+  <view class="card" wx:if="{{user}}">
+    <view class="row">
+      <image class="avatar" src="{{user.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+      <view class="profile-copy">
+        <view class="strong">你好，{{user.nickname || '家庭成员'}}</view>
+        <view class="muted">{{family ? '已加入 ' + family.name : '身份已识别，请创建或加入家庭'}}</view>
+      </view>
+    </view>
+    <button class="btn-light profile-btn" bindtap="getProfile">同步微信头像和昵称</button>
+  </view>
+
+  <view class="card" wx:if="{{!family}}">
+    <view class="section-title">创建一个家庭空间</view>
+    <input class="input" value="{{familyName}}" maxlength="24" placeholder="例如：我们一家人" data-field="familyName" bindinput="onInput" />
+    <button class="btn-primary" loading="{{creating}}" bindtap="createFamily">创建家庭并生成邀请码</button>
+    <view class="divider"></view>
+    <view class="section-title">加入已有家庭</view>
+    <input class="input code-input" value="{{inviteCode}}" maxlength="8" placeholder="输入家人分享的邀请码" data-field="inviteCode" bindinput="onInput" />
+    <button class="btn-light" loading="{{joining}}" bindtap="joinFamily">加入家庭</button>
+  </view>
+  <view class="footer-note">家庭空间仅供已加入的成员查看。请只邀请信任的家人。</view>
+</view>

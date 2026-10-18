@@ -1,0 +1,13 @@
+<view class="page profile-page">
+  <view class="card profile-card">
+    <view class="avatar-section">
+      <image class="profile-avatar" src="{{avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+      <button class="btn-light avatar-button" bindtap="chooseAvatar">更换头像</button>
+      <view class="muted">选择相册图片或拍照</view>
+    </view>
+    <view class="field-label">我的名称</view>
+    <input class="profile-input" value="{{nickname}}" maxlength="30" placeholder="请输入你在家庭中的称呼" bindinput="onNicknameInput" />
+    <view class="field-hint">例如：爸爸、妈妈、小宝，也可以使用自己的昵称。</view>
+    <button class="btn-primary save-button" loading="{{saving}}" disabled="{{saving}}" bindtap="saveProfile">保存资料</button>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+<view class="page publish-page">
+  <view class="title">旅行值得被记住</view>
+  <view class="subtitle">选几张照片，写下故事，剩下的交给时间。</view>
+  <view class="card">
+    <view class="section-title">旅行照片 <text class="muted">（最多 9 张）</text></view>
+    <view class="photo-grid">
+      <view class="photo-cell" wx:for="{{photos}}" wx:key="path"><image src="{{item.path}}" mode="aspectFill" /><text class="remove-photo" data-index="{{index}}" catchtap="removePhoto">×</text></view>
+      <view class="add-photo" wx:if="{{photos.length < 9}}" bindtap="choosePhotos"><text>＋</text><view>添加照片</view></view>
+    </view>
+    <view class="section-title">写点旅行故事</view>
+    <textarea class="input story-input" value="{{form.content}}" data-field="content" bindinput="onInput" maxlength="3000" placeholder="路上的风景、一起吃的美食、某个难忘瞬间……" />
+  </view>
+
+  <view class="card">
+    <view class="section-title">这趟旅行去了哪里</view>
+    <view class="field-label">城市（填写城市即可自动点亮足迹）</view>
+    <input class="input" value="{{form.city}}" data-field="city" bindinput="onInput" placeholder="例如：厦门市" />
+    <view class="two-col">
+      <view class="field-half"><view class="field-label">省份 / 地区</view><input class="input" value="{{form.province}}" data-field="province" bindinput="onInput" placeholder="福建省" /></view>
+      <view class="field-half"><view class="field-label">国家</view><input class="input" value="{{form.country}}" data-field="country" bindinput="onInput" placeholder="中国" /></view>
+    </view>
+    <view class="field-label">景点 / 地点名称</view>
+    <input class="input" value="{{form.locationName}}" data-field="locationName" bindinput="onInput" placeholder="例如：鼓浪屿日光岩" />
+    <view class="row location-actions">
+      <button class="btn-light compact-btn" bindtap="chooseLocation">地图选点</button>
+      <button class="btn-light compact-btn" bindtap="useCurrentLocation">使用当前位置</button>
+    </view>
+    <view class="row search-row">
+      <input class="input search-place" value="{{placeKeyword}}" bindinput="onPlaceKeyword" placeholder="搜索具体地点（需配置腾讯 Key）" />
+      <button class="btn-light compact-btn" bindtap="searchPlaces">搜索</button>
+    </view>
+    <view class="suggestion-list" wx:if="{{suggestions.length}}">
+      <view class="suggestion" wx:for="{{suggestions}}" wx:key="id" data-index="{{index}}" bindtap="chooseSuggestion">
+        <view class="suggestion-title">{{item.title}}</view><view class="muted">{{item.address || item.city || ''}}</view>
+      </view>
+    </view>
+    <view class="coordinate muted" wx:if="{{form.lat && form.lng}}">已记录地点坐标 · {{form.lat}}, {{form.lng}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">旅行信息</view>
+    <view class="field-label">旅行日期</view>
+    <picker mode="date" value="{{form.visitDate}}" end="2099-12-31" bindchange="onDateChange"><view class="input picker-input">{{form.visitDate || '选择旅行日期'}}</view></picker>
+    <view class="two-col">
+      <view class="field-half"><view class="field-label">酒店</view><input class="input" value="{{form.hotel}}" data-field="hotel" bindinput="onInput" placeholder="入住酒店" /></view>
+      <view class="field-half"><view class="field-label">餐厅</view><input class="input" value="{{form.restaurant}}" data-field="restaurant" bindinput="onInput" placeholder="印象深刻的餐厅" /></view>
+    </view>
+    <view class="two-col">
+      <view class="field-half"><view class="field-label">交通方式</view><input class="input" value="{{form.transport}}" data-field="transport" bindinput="onInput" placeholder="高铁 / 自驾" /></view>
+      <view class="field-half"><view class="field-label">花费（元）</view><input class="input" type="digit" value="{{form.amount}}" data-field="amount" bindinput="onInput" placeholder="选填" /></view>
+    </view>
+    <view class="field-label">同行人（姓名，用逗号隔开）</view>
+    <input class="input" value="{{travelersText}}" bindinput="onTravelersInput" placeholder="例如：爸爸、妈妈、小明" />
+    <view class="field-label">标签（用逗号隔开）</view>
+    <input class="input" value="{{tagsText}}" bindinput="onTagsInput" placeholder="亲子游、美食、海边" />
+  </view>
+  <button class="btn-primary publish-btn" loading="{{publishing}}" bindtap="publish">保存到家庭旅行日记</button>
+  <view class="bottom-note">发布后，同一家庭的成员都可以查看这篇日记。</view>
+</view>

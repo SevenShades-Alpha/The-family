@@ -1,0 +1,42 @@
+<view class="page timeline-page">
+  <view class="topline">
+    <view>
+      <view class="eyebrow">OUR FAMILY JOURNAL</view>
+      <view class="title">{{familyName || '我们的旅行'}}</view>
+      <view class="subtitle">把一起走过的路，变成看得见的回忆。</view>
+    </view>
+    <button class="write-btn" bindtap="goPublish">＋ 写日记</button>
+  </view>
+  <view class="filter-card card">
+    <input class="input search-input" placeholder="按城市或标签搜索" value="{{keyword}}" bindinput="onKeyword" />
+    <view class="filter-row">
+      <picker mode="selector" range="{{memberNames}}" value="{{memberIndex}}" bindchange="onMemberChange"><view class="filter-chip">成员：{{memberNames[memberIndex] || '全部'}}</view></picker>
+      <picker mode="selector" range="{{years}}" value="{{yearIndex}}" bindchange="onYearChange"><view class="filter-chip">年份：{{years[yearIndex] || '全部'}}</view></picker>
+    </view>
+  </view>
+  <view wx:if="{{loading}}" class="loading muted">正在翻看家里的旅行记忆…</view>
+  <view wx:elif="{{!filtered.length}}" class="empty card">
+    <view class="empty-icon">📖</view>
+    <view class="section-title">这里还很安静</view>
+    <view class="muted">写下第一篇旅行日记，让家庭足迹开始亮起来。</view>
+    <button class="btn-primary empty-btn" bindtap="goPublish">记录第一次旅行</button>
+  </view>
+  <view wx:else>
+    <view class="memory-card card" wx:for="{{filtered}}" wx:key="_id" data-id="{{item._id}}" bindtap="openDiary">
+      <view class="author-row">
+        <image class="small-avatar" src="{{item.author.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <view class="author-info">
+          <view class="author-name">{{item.author.nickname || '家庭成员'}}</view>
+          <view class="muted">{{item.visitDateText}} 出发</view>
+        </view>
+        <view class="date-badge">{{item.yearText}}</view>
+      </view>
+      <image wx:if="{{item.imageUrls.length}}" class="cover" src="{{item.imageUrls[0]}}" mode="aspectFill" lazy-load="true" />
+      <view wx:else class="cover cover-empty">✦ 一段值得记住的旅程 ✦</view>
+      <view class="place-line"><text class="pin">⌖</text> {{item.city || item.locationName || '一次特别的出行'}}</view>
+      <view class="diary-content">{{item.content || '这段旅程还没有写下文字。'}}</view>
+      <view class="tags" wx:if="{{item.tags.length}}"><text class="pill" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text></view>
+      <view class="card-bottom"><text class="muted">{{item.imageUrls.length}} 张照片</text><text class="muted">♥ {{item.likesCount || 0}} · {{item.commentCount || 0}} 条评论</text></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="page map-page">
+  <view class="map-heading">
+    <view class="eyebrow">PLACES WE REMEMBER</view>
+    <view class="title">我们的足迹地图</view>
+    <view class="subtitle">每个亮起的点，都是一家人共同的回忆。</view>
+  </view>
+  <view class="stats-strip">
+    <view class="stat"><view class="stat-num">{{cityCount}}</view><view class="stat-label">点亮城市</view></view>
+    <view class="stat"><view class="stat-num">{{provinceCount}}</view><view class="stat-label">到访省份</view></view>
+    <view class="stat"><view class="stat-num">{{countryCount}}</view><view class="stat-label">到访国家</view></view>
+  </view>
+  <view class="map-shell card">
+    <view class="map-legend"><view class="legend-item"><view class="legend-dot active-dot"></view>去过的城市</view><view class="legend-item"><view class="legend-dot inactive-dot"></view>还没记录到访</view></view>
+    <map id="familyMap" class="family-map" latitude="35.8617" longitude="104.1954" scale="4" markers="{{markers}}" bindmarkertap="onMarkerTap" enable-scroll="true" enable-zoom="true" />
+    <view class="map-caption muted">第一版使用城市中心点标记，不代表精确的行政区边界。</view>
+  </view>
+  <view class="section-title">找一个城市</view>
+  <view class="city-search-row">
+    <input class="input city-search" placeholder="输入城市或省份，如：厦门、福建" value="{{keyword}}" bindinput="onSearch" bindconfirm="submitSearch" confirm-type="search" />
+    <button class="btn-primary city-search-button" bindtap="submitSearch">搜索</button>
+  </view>
+  <view class="search-help">输入城市名或省份名后点击“搜索”，也可以直接点击下方城市卡片查看足迹或打卡。</view>
+  <view class="search-summary" wx:if="{{keyword}}">匹配到 {{filteredCities.length}} 个城市</view>
+  <view class="city-grid" wx:if="{{filteredCities.length}}">
+    <view class="city-item {{item.visited ? 'city-visited' : ''}}" wx:for="{{filteredCities}}" wx:for-item="item" wx:for-index="index" wx:key="city" data-index="{{index}}" bindtap="onCityTap">
+      <view class="city-status">{{item.visited ? '●' : '○'}}</view><view class="city-name">{{item.city}}</view><view class="city-sub">{{item.visited ? '已留下回忆' : item.province}}</view>
+    </view>
+  </view>
+  <view class="card city-empty" wx:else>没有找到相关城市。试试输入城市名（如“厦门”）或省份名（如“福建”）。</view>
+</view>

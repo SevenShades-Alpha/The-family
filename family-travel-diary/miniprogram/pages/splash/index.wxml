@@ -1,0 +1,14 @@
+<view class="splash {{leaving ? 'splash-leaving' : ''}}">
+  <view class="sun"></view>
+  <view class="landscape landscape-back"></view>
+  <view class="landscape landscape-front"></view>
+  <view class="route route-one"></view>
+  <view class="pin pin-one">✦</view>
+  <view class="pin pin-two">✦</view>
+  <view class="content">
+    <view class="mark">⌂</view>
+    <view class="title">我们一家人</view>
+    <view class="subtitle">把一起走过的路，变成看得见的回忆。</view>
+    <view class="dots"><view></view><view></view><view></view></view>
+  </view>
+</view>

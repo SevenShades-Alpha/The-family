@@ -1,0 +1,47 @@
+<view class="page detail-page" wx:if="{{diary}}">
+  <view class="diary-manage-row" wx:if="{{canDelete}}">
+    <text class="muted manage-hint">你可以管理这篇日记</text>
+    <button class="delete-diary-btn" loading="{{deleting}}" disabled="{{deleting}}" bindtap="deleteDiary">删除日记</button>
+  </view>
+  <view class="card author-card">
+    <image class="avatar" src="{{diary.author.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+    <view class="author-copy"><view class="author-name">{{diary.author.nickname || '家庭成员'}}</view><view class="muted">{{visitDateText}} 的旅行记录</view></view>
+  </view>
+  <swiper class="photo-swiper" indicator-dots="{{diary.imageUrls.length > 1}}" circular="true" wx:if="{{diary.imageUrls.length}}">
+    <swiper-item wx:for="{{diary.imageUrls}}" wx:key="*this"><image src="{{item}}" mode="aspectFill" class="detail-image" /></swiper-item>
+  </swiper>
+  <view class="card">
+    <view class="title">{{diary.city || diary.locationName || '一段旅行'}}</view>
+    <view class="subtitle" wx:if="{{diary.locationName}}">⌖ {{diary.locationName}}</view>
+    <view class="full-content">{{diary.content}}</view>
+    <view class="tags" wx:if="{{diary.tags.length}}"><text class="pill" wx:for="{{diary.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text></view>
+    <view class="divider"></view>
+    <view class="info-row" wx:if="{{diary.visitDateText}}"><text class="info-label">旅行日期</text><text>{{diary.visitDateText}}</text></view>
+    <view class="info-row" wx:if="{{diary.country || diary.province}}"><text class="info-label">所在地区</text><text>{{diary.country}} {{diary.province}} {{diary.district}}</text></view>
+    <view class="info-row" wx:if="{{diary.spot}}"><text class="info-label">景点</text><text>{{diary.spot}}</text></view>
+    <view class="info-row" wx:if="{{diary.hotel}}"><text class="info-label">酒店</text><text>{{diary.hotel}}</text></view>
+    <view class="info-row" wx:if="{{diary.restaurant}}"><text class="info-label">餐厅</text><text>{{diary.restaurant}}</text></view>
+    <view class="info-row" wx:if="{{diary.transport}}"><text class="info-label">交通方式</text><text>{{diary.transport}}</text></view>
+    <view class="info-row" wx:if="{{diary.hasAmount}}"><text class="info-label">花费</text><text>{{diary.currency || 'CNY'}} {{diary.amount}}</text></view>
+    <view class="info-row" wx:if="{{diary.travelersText}}"><text class="info-label">同行人</text><text>{{diary.travelersText}}</text></view>
+  </view>
+  <view class="card" wx:if="{{diary.lat && diary.lng}}">
+    <view class="section-title">旅行地点</view>
+    <map class="detail-map" latitude="{{diary.lat}}" longitude="{{diary.lng}}" scale="13" markers="{{markers}}" show-location="false" />
+    <view class="muted map-caption">{{diary.locationName || diary.city}}</view>
+  </view>
+  <view class="social-row">
+    <button class="like-btn {{liked ? 'liked' : ''}}" bindtap="toggleLike">{{liked ? '♥ 已喜欢' : '♡ 喜欢'}} {{likesCount}}</button>
+    <text class="muted">{{comments.length}} 条家庭留言</text>
+  </view>
+  <view class="card comments-card">
+    <view class="section-title">家人的留言</view>
+    <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+      <image class="small-avatar" src="{{item.author.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+      <view class="comment-body"><view class="comment-head"><text class="comment-name">{{item.author.nickname || '家庭成员'}}</text><text class="muted">{{item.createdAtText}}</text></view><view>{{item.content}}</view></view>
+    </view>
+    <view wx:if="{{!comments.length}}" class="muted empty-comments">还没有留言，来写下第一句吧。</view>
+    <view class="comment-compose"><input class="input comment-input" value="{{commentText}}" bindinput="onCommentInput" placeholder="留一句话给家人…" maxlength="500" /><button class="btn-primary send-btn" bindtap="submitComment">发送</button></view>
+  </view>
+</view>
+<view wx:else class="page"><view class="card muted">正在打开这篇旅行日记…</view></view>

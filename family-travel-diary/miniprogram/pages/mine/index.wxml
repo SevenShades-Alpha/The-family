@@ -1,0 +1,38 @@
+<view class="page mine-page">
+  <view class="family-card card">
+    <view class="family-title-row">
+      <view class="family-heading">
+        <image wx:if="{{family.avatarUrl}}" class="family-avatar" src="{{family.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="family-stamp">家</view>
+        <view class="family-heading-text"><view class="eyebrow">OUR FAMILY</view><view class="title">{{family.name || '我们的家庭'}}</view></view>
+      </view>
+      <view class="family-actions" wx:if="{{isCreator}}"><text class="mini-action" bindtap="renameFamily">改名称</text><text class="mini-action" bindtap="changeFamilyAvatar">换头像</text></view>
+    </view>
+    <view class="invite-line"><view><view class="muted">家庭邀请码</view><view class="invite-code">{{family.inviteCode || '------'}}</view></view><button class="btn-light copy-btn" bindtap="copyInvite">复制邀请码</button></view>
+    <view class="muted">分享给家人后，对方输入邀请码即可加入。</view>
+  </view>
+  <view class="section-title">家庭旅行统计</view>
+  <view class="stats-grid">
+    <view class="metric-card"><view class="metric-icon">⌖</view><view class="metric-num">{{stats.cityCount || 0}}</view><view class="metric-label">点亮城市</view></view>
+    <view class="metric-card"><view class="metric-icon">▤</view><view class="metric-num">{{stats.provinceCount || 0}}</view><view class="metric-label">到访省份</view></view>
+    <view class="metric-card"><view class="metric-icon">◎</view><view class="metric-num">{{stats.countryCount || 0}}</view><view class="metric-label">到访国家</view></view>
+    <view class="metric-card"><view class="metric-icon">▣</view><view class="metric-num">{{stats.diaryCount || 0}}</view><view class="metric-label">旅行日记</view></view>
+    <view class="metric-card"><view class="metric-icon">▧</view><view class="metric-num">{{stats.photoCount || 0}}</view><view class="metric-label">旅行照片</view></view>
+    <view class="metric-card"><view class="metric-icon">♧</view><view class="metric-num">{{members.length}}</view><view class="metric-label">家庭成员</view></view>
+  </view>
+  <view class="section-title">家庭成员</view>
+  <view class="card member-card" wx:for="{{members}}" wx:key="userId" data-userid="{{item.userId}}" bindtap="openMemberProfile">
+    <image class="avatar" src="{{item.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+    <view class="member-info"><view class="member-name">{{item.nickname || '家庭成员'}} <text class="role-pill" wx:if="{{item.role === 'admin'}}">创建者</text></view><view class="muted">加入时间：{{item.joinedAtText}}</view></view>
+    <button wx:if="{{isCreator && item.role !== 'admin'}}" class="remove-member" data-userid="{{item.userId}}" catchtap="removeMember">移除</button>
+  </view>
+  <view class="card personal-card">
+    <view class="section-title">我的旅行</view>
+    <view class="personal-row"><text>我记录的日记</text><text class="personal-value">{{stats.myDiaryCount || 0}} 篇</text></view>
+    <view class="personal-row"><text>我记录的照片</text><text class="personal-value">{{stats.myPhotoCount || 0}} 张</text></view>
+    <view class="personal-row"><text>我点亮的城市</text><text class="personal-value">{{stats.myCityCount || 0}} 座</text></view>
+    <button class="btn-light profile-sync" bindtap="openMyProfile">个人资料</button>
+  </view>
+  <button class="btn-light leave-btn" bindtap="refresh">刷新家庭数据</button>
+  <view class="privacy-note">此空间供家庭成员内部使用。请勿将邀请码分享给不熟悉的人。</view>
+</view>

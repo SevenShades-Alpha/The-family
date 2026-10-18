@@ -1,0 +1,9 @@
+.profile-page { padding-top: 32rpx; }
+.profile-card { padding: 36rpx 30rpx; }
+.avatar-section { display:flex; flex-direction:column; align-items:center; padding:12rpx 0 42rpx; }
+.profile-avatar { width:168rpx; height:168rpx; border-radius:50%; background:#F1E1D0; margin-bottom:22rpx; }
+.avatar-button { margin:0 0 12rpx; }
+.field-label { font-size:27rpx; font-weight:650; margin-bottom:16rpx; }
+.profile-input { box-sizing:border-box; width:100%; min-height:88rpx; padding:20rpx 22rpx; border:1rpx solid #E9DCCB; border-radius:16rpx; background:#FFFCF7; font-size:28rpx; color:#44372D; }
+.field-hint { color:#A59586; font-size:22rpx; line-height:1.6; margin-top:12rpx; }
+.save-button { margin-top:38rpx; width:100%; }

@@ -1,0 +1,31 @@
+ .mine-page { padding-top:28rpx; }
+.family-card { background:linear-gradient(135deg, #F7E5D0, #FFFDF8); }
+.family-title-row { display:flex; align-items:center; justify-content:space-between; }
+.eyebrow { color:#BC764B; letter-spacing:3rpx; font-size:19rpx; margin-bottom:8rpx; }
+.family-stamp { width:84rpx; height:84rpx; display:flex; align-items:center; justify-content:center; color:#FFF; background:#B96535; border-radius:24rpx; font-size:40rpx; transform:rotate(5deg); }
+.invite-line { display:flex; align-items:center; justify-content:space-between; margin:28rpx 0 14rpx; }
+.invite-code { color:#9F522D; font-weight:800; font-size:42rpx; letter-spacing:7rpx; margin-top:8rpx; }
+.copy-btn { margin:0; font-size:22rpx; padding:0 18rpx; }
+.stats-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:14rpx; }
+.metric-card { background:#FFFFFF; border-radius:20rpx; padding:20rpx 8rpx; text-align:center; box-shadow:0 8rpx 22rpx rgba(111,75,42,.04); }
+.metric-icon { color:#B96535; font-size:28rpx; }
+.metric-num { color:#A85D33; font-size:38rpx; font-weight:750; margin:4rpx 0; }
+.metric-label { color:#998675; font-size:21rpx; }
+.member-card { display:flex; align-items:center; margin-bottom:14rpx; }
+.member-info { margin-left:18rpx; flex:1; }
+.member-name { font-size:27rpx; font-weight:650; margin-bottom:6rpx; }
+.role-pill { background:#F6E7D8; color:#A65E35; font-size:19rpx; border-radius:999rpx; padding:4rpx 10rpx; margin-left:8rpx; }
+.personal-row { display:flex; justify-content:space-between; padding:18rpx 0; border-bottom:1rpx solid #F2E8DC; }
+.personal-row:last-child { border-bottom:0; }
+.personal-value { color:#A85D33; font-weight:650; }
+.leave-btn { margin-top:22rpx; }
+.privacy-note { font-size:21rpx; color:#A59586; text-align:center; margin:22rpx 20rpx 40rpx; }
+
+.profile-sync { margin-top:22rpx; font-size:23rpx; }
+
+.family-heading { display:flex; align-items:center; gap:18rpx; min-width:0; flex:1; }
+.family-heading-text { min-width:0; flex:1; }
+.family-avatar { width:84rpx; height:84rpx; border-radius:24rpx; background:#F1E1D0; flex-shrink:0; }
+.family-actions { display:flex; flex-direction:column; align-items:flex-end; gap:12rpx; margin-left:12rpx; }
+.mini-action { color:#9F522D; font-size:22rpx; padding:6rpx 0; }
+.remove-member { flex-shrink:0; margin:0 0 0 10rpx; padding:0 16rpx; line-height:56rpx; height:56rpx; font-size:22rpx; border-radius:999rpx; color:#A34C3D; background:#FBECE8; }

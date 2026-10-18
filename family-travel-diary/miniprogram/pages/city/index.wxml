@@ -1,0 +1,19 @@
+<view class="page city-page" wx:if="{{place}}">
+  <view class="city-hero card">
+    <view class="city-illustration">⌖</view>
+    <view class="title">{{place.city}}</view>
+    <view class="subtitle">{{place.country}} · {{place.province}}</view>
+    <view class="city-stats">
+      <view><view class="city-stat-num">{{place.visitCount || 1}}</view><view class="muted">记录到访</view></view>
+      <view><view class="city-stat-num">{{place.diaryCount || diaries.length}}</view><view class="muted">篇相关日记</view></view>
+    </view>
+    <view class="date-info"><text>第一次：{{firstVisitText || '待记录'}}</text><text>最近一次：{{lastVisitText || '待记录'}}</text></view>
+  </view>
+  <view class="section-title">与这座城市有关的日记</view>
+  <view class="card diary-row" wx:for="{{diaries}}" wx:key="_id" data-id="{{item._id}}" bindtap="openDiary">
+    <image wx:if="{{item.imageUrls.length}}" src="{{item.imageUrls[0]}}" mode="aspectFill" class="diary-thumb" />
+    <view class="diary-info"><view class="diary-date">{{item.visitDateText}}</view><view class="diary-text">{{item.content || item.locationName || '一段美好回憶'}}</view><view class="muted">{{item.author.nickname || '家庭成员'}}</view></view>
+  </view>
+  <view wx:if="{{!diaries.length}}" class="card muted">这座城市暂时还没有关联日记，可以之后补充旅程回忆。</view>
+</view>
+<view wx:else class="page"><view class="card muted">正在整理这座城市的旅行足迹…</view></view>

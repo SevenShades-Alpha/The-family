@@ -1,0 +1,8 @@
+ .login-page { padding-top: 42rpx; }
+.hero { min-height: 280rpx; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #F9E9D3, #FFFDF8); }
+.hero-mark { font-size: 54rpx; color: #B96535; margin-bottom: 18rpx; }
+.profile-copy { margin-left: 20rpx; }
+.strong { font-size: 30rpx; font-weight: 700; }
+.profile-btn { margin-top: 24rpx; }
+.code-input { letter-spacing: 3rpx; }
+.footer-note { color: #A8998A; font-size: 22rpx; text-align: center; padding: 16rpx 20rpx 40rpx; }
